@@ -15,12 +15,13 @@ class Segment {
     public:
         Segment();
         Segment(float x, float y, float len, float angle);
-        Segment(Segment *parent, float len, float angle);
+        Segment(Segment& parent, float len, float angle);
         void calculateB();
         void update();
         void draw(sf::RenderWindow *window);
         Vector2 getA();
         void setA(Vector2 *pos);
+        void setB(Vector2 *pos);
         Vector2 getB();
         Segment *parent;
         Segment *child;

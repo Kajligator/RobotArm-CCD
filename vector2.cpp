@@ -21,13 +21,13 @@ Vector2 * Vector2::setMag(float len){
     return this;
 }
 
-Vector2 * Vector2::add(Vector2 anotherVector) {
+Vector2 * Vector2::add(Vector2& anotherVector) {
     this->x = this->x + anotherVector.x;
     this->y = this->y + anotherVector.y;
     return this;
 }
 
-Vector2 * Vector2::sub(Vector2 anotherVector) {
+Vector2 * Vector2::sub(Vector2& anotherVector) {
     this->x = this->x - anotherVector.x;
     this->y = this->y - anotherVector.y;
     return this;
@@ -39,7 +39,7 @@ Vector2 * Vector2::mult(float n) {
     return this;
 }
 
-float Vector2::dot(Vector2 anotherVector) {
+float Vector2::dot(Vector2& anotherVector) {
     return this->x*anotherVector.x+this->y*anotherVector.y;
 }
 

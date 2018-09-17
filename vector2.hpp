@@ -13,11 +13,11 @@ class Vector2
         float y;
         void set(float x, float y);
         Vector2 * div(float n);
-        Vector2 * add(Vector2 anotherVector);
-        Vector2 * sub(Vector2 anotherVector);
+        Vector2 * add(Vector2& anotherVector);
+        Vector2 * sub(Vector2& anotherVector);
         Vector2 * mult(float n);
         Vector2 * normalize();
-        float dot(Vector2 anotherVector);
+        float dot(Vector2& anotherVector);
         float magnitude();
         Vector2 * setMag(float len);
         float mag();

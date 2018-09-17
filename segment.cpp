@@ -10,8 +10,8 @@ Segment::Segment(float x, float y, float len, float angle){
     calculateB();
 }
 
-Segment::Segment(Segment *parent, float len, float angle) {
-    this->parent = parent;
+Segment::Segment(Segment& parent_, float len, float angle) {
+    this->parent = &parent_;
     this->a = parent->b;
     this->len = len;
     this->angle = angle;
@@ -40,11 +40,15 @@ void Segment::setA(Vector2 *pos) {
     this->a.set(pos->x, pos->y);
 }
 
+void Segment::setB(Vector2 *pos) {
+    this->b.set(pos->x, pos->y);
+}
+
 void Segment::draw(sf::RenderWindow *window){
     sf::Vertex line[] =
             {
-                    sf::Vertex(sf::Vector2f(this->a.x, this->a.x)),
-                    sf::Vertex(sf::Vector2f(this->b.x, this->b.y))
+                    sf::Vertex(sf::Vector2f(this->a.x, this->a.y), sf::Color::Green),
+                    sf::Vertex(sf::Vector2f(this->b.x, this->b.y), sf::Color::Red)
             };
     window->draw(line, 2, sf::Lines);
 }
