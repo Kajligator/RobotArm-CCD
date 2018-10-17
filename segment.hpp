@@ -3,28 +3,27 @@
 
 
 #include <SFML/Graphics/RenderWindow.hpp>
-#include "vector2.hpp"
+#include "Eigen/Core"
 
-class Segment {
+class segment {
     private:
-    float len;
-    float angle;
-    Vector2 a;
-    Vector2 b;
+        Eigen::Vector3d begin;
+        Eigen::Vector3d end;
+        double length;
+        double angle;
 
     public:
-        Segment();
-        Segment(float x, float y, float len, float angle);
-        Segment(Segment& parent, float len, float angle);
-        void calculateB();
-        void update();
-        void draw(sf::RenderWindow *window);
-        Vector2 getA();
-        void setA(Vector2 *pos);
-        void setB(Vector2 *pos);
-        Vector2 getB();
-        Segment *parent;
-        Segment *child;
+        segment();
+        segment(Eigen::Vector3d end, double length);
+        void calculateEndPoint(Eigen::Vector3d bp, double length, double angle);
+        void calculateEndPoint();
+        void draw(sf::RenderWindow *window, float screen_width, float screen_height);
+        Eigen::Vector3d getBegin();
+        Eigen::Vector3d getEnd();
+        void setEnd(Eigen::Vector3d);
+        double getLength();
+        double getAngle();
+        void setAngle(double angle);
 };
 
 
