@@ -10,11 +10,11 @@ segment::segment(){
 segment::segment(Eigen::Vector3d end, double len) {
     this->begin = end;
     this->length = len;
-    calculateEndPoint(begin, length, angle);
+    calculateEndPoint(begin, angle);
     this->angle = 0;
 }
 
-void segment::calculateEndPoint(Eigen::Vector3d bp, double length, double angle) {
+void segment::calculateEndPoint(Eigen::Vector3d bp, double angle) {
     double y = (length * sin(angle)) + bp.y();
     double x = (length * cos(angle)) + bp.x();
     this->end = Eigen::Vector3d(x, y, 0);
@@ -49,18 +49,10 @@ Eigen::Vector3d segment::getEnd() {
     return this->end;
 }
 
-double segment::getLength() {
-    return this->length;
-}
-
 double segment::getAngle() {
     return this->angle;
 }
 
-void segment::setAngle(double angle) {
-    this->angle = angle;
-}
-
-void segment::setEnd(Eigen::Vector3d end) {
-    this->end = end;
+void segment::setBegin(Eigen::Vector3d begin){
+    this->begin = begin;
 }

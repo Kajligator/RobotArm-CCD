@@ -15,15 +15,13 @@ class segment {
     public:
         segment();
         segment(Eigen::Vector3d end, double length);
-        void calculateEndPoint(Eigen::Vector3d bp, double length, double angle);
+        void calculateEndPoint(Eigen::Vector3d bp, double angle);
         void calculateEndPoint();
         void draw(sf::RenderWindow *window, float screen_width, float screen_height);
         Eigen::Vector3d getBegin();
         Eigen::Vector3d getEnd();
-        void setEnd(Eigen::Vector3d);
-        double getLength();
+        void setBegin(Eigen::Vector3d begin);
         double getAngle();
-        void setAngle(double angle);
 };
 
 
