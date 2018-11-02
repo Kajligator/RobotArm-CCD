@@ -101,13 +101,13 @@ void Arm::updateIK(Eigen::Vector3d targetPos){
                     angleDeg = simplifyAngle(angleDeg - segments[link].getAngle());
                     printf("Angle: %f\n", angleDeg);
                     segments[link].calculateEndPoint(rootPos, angleDeg);
-                    segments[link].setBegin(segments[link - 1].getEnd());
+                    segments[link + 1].setBegin(segments[link].getEnd());
                 }
                 else if (crossResult.z() < 0.0){
                     angleDeg = simplifyAngle(angleDeg + segments[link].getAngle());
                     printf("Angle: %f\n", angleDeg);
                     segments[link].calculateEndPoint(rootPos, angleDeg);
-                    segments[link].setBegin(segments[link - 1].getEnd());
+                    segments[link + 1].setBegin(segments[link].getEnd());
                 }
             }
         }

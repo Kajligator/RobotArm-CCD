@@ -7,7 +7,7 @@
 #include <unistd.h>
 #include "arm.hpp"
 
-#define NUM_SEG 10
+#define NUM_SEG 3
 #define SEGMENT_LEN 50
 #define HEIGHT 1200
 #define WIDTH 1200

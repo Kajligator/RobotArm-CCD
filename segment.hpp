@@ -1,7 +1,6 @@
 #ifndef ROBOTARM_CCD_SEGMENT_H
 #define ROBOTARM_CCD_SEGMENT_H
 
-
 #include <SFML/Graphics/RenderWindow.hpp>
 #include "Eigen/Core"
 
