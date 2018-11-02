@@ -1,28 +1,31 @@
+//
+// Created by Geert Lens on 20/10/2018.
+//
+
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <unistd.h>
 #include "arm.hpp"
-#include "helpers.h"
-#include <Eigen/Dense>
 
-#define NUM_SEG 3
+#define NUM_SEG 10
 #define SEGMENT_LEN 50
 #define HEIGHT 1200
 #define WIDTH 1200
-#define DAMPING true
-#define DOF_RESTRICTED true
 
 float x, y;
 bool mouse_clicked = false;
 
 Arm arm(NUM_SEG, SEGMENT_LEN);
 
+/// Update the coordinates of the cursor
 void updateCursorPosition(sf::RenderWindow *window){
     x = sf::Mouse::getPosition(*window).x;
     y = sf::Mouse::getPosition(*window).y;
     printf("Cursor position: (%f, %f)\n", x, y);
+    printf("Target: (%f, %f)\n", x - WIDTH/2.0, -(y - HEIGHT/2.0));
 }
 
+/// Draw the cursor in the window
 void drawCursor(sf::RenderWindow *window){
     sf::CircleShape circle(5);
     circle.setPosition(sf::Vector2f(x-5, y-5));
@@ -54,7 +57,8 @@ int main() {
         if(mouse_clicked){
             printf("%s", "CLICK\n");
             updateCursorPosition(&window);
-            arm.updateIK(Eigen::Vector3d(x, y, 0));
+            arm.updateIK(Eigen::Vector3d(x - WIDTH/2.0, y - HEIGHT/2.0, 0));
+            //arm.updateIK(Eigen::Vector3d(x, y, 0));
             arm.printCoords();
             mouse_clicked = false;
         }

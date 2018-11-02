@@ -10,7 +10,6 @@
 class Arm {
     private:
         int segmentCount;
-        float vectorDistance(Eigen::Vector3d point1, Eigen::Vector3d point2);
     public:
         segment segments[0];
         Arm();

@@ -1,3 +1,7 @@
+//
+// Created by Geert Lens on 20/10/2018.
+//
+
 #include "segment.hpp"
 #include <cmath>
 #include <SFML/Graphics.hpp>
@@ -14,6 +18,7 @@ segment::segment(Eigen::Vector3d end, double len) {
     this->angle = 0;
 }
 
+/// Calculate end point of segment with given angle
 void segment::calculateEndPoint(Eigen::Vector3d bp, double angle) {
     double y = (length * sin(angle)) + bp.y();
     double x = (length * cos(angle)) + bp.x();
@@ -21,12 +26,14 @@ void segment::calculateEndPoint(Eigen::Vector3d bp, double angle) {
     this->angle = angle;
 }
 
+/// Calculate end point of segment with stored values
 void segment::calculateEndPoint() {
     double dx = length * cos(this->angle);
     double dy = length * sin(this->angle);
     this->end = Eigen::Vector3d(this->begin.x() + dx, this->begin.y() + dy, 0);
 }
 
+/// Draw segment and joint
 void segment::draw(sf::RenderWindow *window, float screen_width, float screen_height){
     sf::Vertex line[] =
             {
@@ -53,6 +60,6 @@ double segment::getAngle() {
     return this->angle;
 }
 
-void segment::setBegin(Eigen::Vector3d begin){
+void segment::setBegin(Eigen::Vector3d begin) {
     this->begin = begin;
 }
