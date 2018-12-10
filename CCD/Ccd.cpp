@@ -4,8 +4,6 @@
 #include "Ccd.h"
 #include "Vector3.h"
 
-#define VERBOSE
-
 Ccd::Ccd(ArmSegment *armSegments, const unsigned int AMOUNT_OF_LINKS) : armSegments(armSegments),
                                                                         AMOUNT_OF_LINKS(AMOUNT_OF_LINKS) {}
 /// Calculate distance between vector a and vector b
@@ -24,6 +22,7 @@ void applyDamping(double *angle, ArmSegment *armSegment) {
     }
 }
 
+/// Calculate dot product
 double vectorDotProductAngle(Vector3 *current, Vector3 *target) {
     Point a = current->end;
     Point b = target->end;
@@ -32,6 +31,7 @@ double vectorDotProductAngle(Vector3 *current, Vector3 *target) {
     return acos(dotProductScalar);
 }
 
+/// Calculate cross product
 Vector3 vectorCrossProduct(Vector3 *current, Vector3 *target) {
     Point crossProduct;
     Point a = current->end;
@@ -44,6 +44,7 @@ Vector3 vectorCrossProduct(Vector3 *current, Vector3 *target) {
     return Vector3(crossProduct);
 }
 
+/// Calculate angle of segment towards target point
 double calculateArmSegmentAngle(ArmSegment *currentArmSegment, ArmSegment *finalArmSegment, Point *targetPoint) {
     Vector3 currentVector(currentArmSegment->origin, finalArmSegment->end);
     Vector3 targetVector(currentArmSegment->origin, *targetPoint);
@@ -68,6 +69,7 @@ double calculateArmSegmentAngle(ArmSegment *currentArmSegment, ArmSegment *final
     return angleInRadians;
 }
 
+/// Cycle through the arm
 bool Ccd::computeCcdLink(Point targetPoint) {
     //We start with the last armSegment, and work our way down. Then repeat.
     int activeArmSegmentCounter = AMOUNT_OF_LINKS - 1;

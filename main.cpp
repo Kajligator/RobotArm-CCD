@@ -6,25 +6,25 @@
 #include <iostream>
 #include <fenv.h>
 
-#include "ArmSegment.h"
-#include "Ccd.h"
+#include "CCD/ArmSegment.h"
+#include "CCD/Ccd.h"
 
 #define HEIGHT 1200
 #define WIDTH 1200
 #define VERBOSE
 
 //Default target to reach
-#define DEFAULT_TARGET_X 680.0
-#define DEFAULT_TARGET_Y 550.0
+#define DEFAULT_TARGET_X 800.0
+#define DEFAULT_TARGET_Y 500.0
 
 //Default arm constants
 #define NUMBER_OF_ARM_SEGMENTS 3
-#define DEFAULT_ARM_LENGTH 50.0
+#define DEFAULT_ARM_LENGTH 145.0
 #define ARM_STARTING_ANGLE 0.0
 
 //Default constraints for armSegments
-#define DEFAULT_CONSTRAINT 1.396263
-#define DEFAULT_DAMPING 0.1
+#define DEFAULT_CONSTRAINT 1.570796
+#define DEFAULT_DAMPING 1
 
 bool mouse_clicked = false;
 bool success = false;
@@ -66,17 +66,21 @@ int main() {
     // Create arm segments
     auto *armSegments = new ArmSegment[NUMBER_OF_ARM_SEGMENTS];
 
-    for (int i = 0; i < NUMBER_OF_ARM_SEGMENTS; ++i) {
-        armSegments[i] = ArmSegment(DEFAULT_ARM_LENGTH);
+    armSegments[0] = ArmSegment(146.0);
+    armSegments[0].negativeConstraint = -3.14;
+    armSegments[0].positiveConstraint = 0;
 
+    armSegments[1] = ArmSegment(145.0);
+    armSegments[1].negativeConstraint = -1.570796;
+    armSegments[1].positiveConstraint = 1.570796;
+
+    armSegments[2] = ArmSegment(155.0);
+    armSegments[2].negativeConstraint = -DEFAULT_CONSTRAINT;
+    armSegments[2].positiveConstraint = DEFAULT_CONSTRAINT;
+
+    for (int i = 0; i < NUMBER_OF_ARM_SEGMENTS; ++i) {
         //Set damping for more fluent movements
         armSegments[i].damping = DEFAULT_DAMPING;
-
-        if (i != 0) {
-            // Set joint constraints for all arm segments 45 degrees, but skip the base arm segment (seemed more natural)
-            armSegments[i].negativeConstraint = -DEFAULT_CONSTRAINT;
-            armSegments[i].positiveConstraint = DEFAULT_CONSTRAINT;
-        }
 
         // Register callback, used to iterate updates
         if (i > 0) armSegments[i - 1].registerChildArmSegment(&armSegments[i]);
@@ -91,6 +95,9 @@ int main() {
         armSegments[i].dump();
     }
 #endif
+
+    Ccd ccd = Ccd(armSegments, NUMBER_OF_ARM_SEGMENTS);
+    success = ccd.computeCcdLink(pointToReach);
 
     while (window.isOpen()) {
         // check all the window's events that were triggered since the last iteration of the loop
@@ -112,7 +119,6 @@ int main() {
 #endif
             updateCursorPosition(&window);
             // Apply Cyclic Coordinate Descent
-            Ccd ccd = Ccd(armSegments, NUMBER_OF_ARM_SEGMENTS);
             success = ccd.computeCcdLink(pointToReach);
 
 #ifdef VERBOSE

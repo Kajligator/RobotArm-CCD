@@ -60,9 +60,7 @@ void ArmSegment::calculateNewEndPoint() {
     end.z = origin.z + z_translate;
 }
 
-/**
- * Outputs armSegment data.
- * */
+/// Outputs armSegment data.
 void ArmSegment::dump() {
     std::cout << "==================\nAngle joint: " << angle_joint << "\tAngle ground: " << angle_ground << std::endl;
     std::cout << "x: " << origin.x << ", y: " << origin.y << ", z: " << origin.z << std::endl;

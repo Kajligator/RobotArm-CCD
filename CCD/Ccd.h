@@ -9,7 +9,7 @@
 #include "ArmSegment.h"
 
 #define AMOUNT_OF_TRIES 100
-#define TARGET_REACHED_THRESHOLD 0.001
+#define TARGET_REACHED_THRESHOLD 0.01
 
 class Ccd {
     private:

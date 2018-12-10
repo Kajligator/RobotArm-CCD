@@ -3,7 +3,7 @@ project(RobotArm_CCD)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(RobotArm_CCD main.cpp ArmSegment.cpp ArmSegment.h Ccd.cpp Ccd.h Vector3.cpp Vector3.h Point.cpp Point.h)
+add_executable(RobotArm_CCD main.cpp CCD/Vector3.cpp CCD/Vector3.h CCD/Point.cpp CCD/Point.h CCD/ArmSegment.cpp CCD/ArmSegment.h CCD/Ccd.cpp CCD/Ccd.h)
 
 set(CMAKE_MODULE_PATH "/usr/local/Cellar/sfml/2.4.2_1/share/SFML/cmake/Modules" ${CMAKE_MODULE_PATH})
 find_package(Eigen3 REQUIRED)
