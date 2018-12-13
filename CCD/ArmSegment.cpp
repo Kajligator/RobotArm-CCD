@@ -67,21 +67,3 @@ void ArmSegment::dump() {
     std::cout << "x: " << end.x << ", y: " << end.y << ", z: " << end.z << std::endl;
     std::cout << "==================\n";
 }
-
-/// Draw segment and joint
-void ArmSegment::draw(sf::RenderWindow *window){
-    sf::Vertex line[] =
-            {
-                    sf::Vertex(sf::Vector2f(static_cast<float>(origin.x),
-                                            static_cast<float>(this->origin.z)), sf::Color::Green),
-                    sf::Vertex(sf::Vector2f(static_cast<float>(end.x),
-                                            static_cast<float>(this->end.z)), sf::Color::Magenta)
-            };
-
-    sf::CircleShape joint(4);
-    joint.setPosition(static_cast<float>(end.x - 4),
-                      static_cast<float>(end.z - 4));
-
-    window->draw(line, 2, sf::Lines);
-    window->draw(joint);
-}

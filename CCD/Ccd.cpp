@@ -84,7 +84,7 @@ bool Ccd::computeCcdLink(Point targetPoint) {
         distance = calculateDistanceSquared(targetPoint, finalArmSegment->end);
 
 #ifdef VERBOSE
-                std::cout << "[CCD] Current squared distance: " << distance << "\n";
+        std::cout << "[CCD] Current squared distance: " << distance << "\n";
 #endif
 
         //Check if we are done
